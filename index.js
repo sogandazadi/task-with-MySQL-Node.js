@@ -21,19 +21,6 @@ const connection = mysql.createConnection({
 connection.connect(function(err){
     if(err) throw err;
     console.log("connected")
-    
-    for(let i=0 ; i<10 ; i++){
-        
-        const randomAuthorName = faker.name.findName();
-        const randomBookName = faker.lorem.words();
-        const randomNumber = faker.datatype.number({min: 1 , max:100});
-        const randomPublishedDate = faker.date.past().toISOString().slice(0,19).replace('T' , ' ');
-
-        var sql = `INSERT INTO books_table (name , author , number , published_time) VALUES ('${randomBookName}' ,'${randomAuthorName}',${randomNumber}, '${randomPublishedDate}')`;
-        connection.query(sql, function(err , result){
-        if(err) throw err;
-    })
-    }
 })
 
 app.get("/" , (req , res) =>{
